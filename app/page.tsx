@@ -49,6 +49,7 @@ const EditorCard = memo(({ value, onChange }: { value: string; onChange: (value:
         <Suspense fallback={<div>Loading editor...</div>}>
           <CodeMirror
             value={value}
+            height="350px"
             theme={vscodeDark}
             extensions={[html()]}
             onChange={debouncedOnChange}
@@ -122,7 +123,7 @@ export default function Home() {
   }, [isGenerating, config]);
 
   const handleCopyToClipboard = useCallback(async () => {
-    const element = document.getElementById("preview");
+    const element = document.getElementById("preview-container");
     if (!element) return;
 
     try {
@@ -154,50 +155,50 @@ export default function Home() {
   }), [config]);
 
   return (
-    <main className="container mx-auto px-3 py-4 md:p-6 space-y-6 max-w-7xl">
-      <div className="flex flex-col items-center space-y-3 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">CSS to Image</h1>
-        <p className="text-base text-muted-foreground max-w-lg">
+    <main className="container mx-auto p-2 sm:p-4 md:p-6 space-y-4 sm:space-y-6 max-w-7xl">
+      <div className="flex flex-col items-center space-y-2 text-center px-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">CSS to Image</h1>
+        <p className="text-sm sm:text-base text-muted-foreground">
           Convert HTML and CSS to images with Tailwind CSS support
         </p>
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2 mt-2">
           <a
             href="https://github.com/devlsco/css-to-image"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            <Github className="w-5 h-5" />
+            <Github />
             <span>Open Source on GitHub</span>
           </a>
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         <div className="space-y-4">
           <div className="flex flex-col items-center w-full">
             <Tabs defaultValue="editor" className="w-full">
-              <div className="flex justify-center w-full mb-4">
-                <TabsList className="border w-full md:w-auto flex">
-                  <TabsTrigger value="editor" className="flex-1 md:flex-none">Editor</TabsTrigger>
-                  <TabsTrigger value="templates" className="flex-1 md:flex-none">Templates</TabsTrigger>
-                  <TabsTrigger value="settings" className="flex-1 md:flex-none">Settings</TabsTrigger>
+              <div className="flex justify-center w-full mb-2 sm:mb-4">
+                <TabsList className="border">
+                  <TabsTrigger value="editor">Editor</TabsTrigger>
+                  <TabsTrigger value="templates">Templates</TabsTrigger>
+                  <TabsTrigger value="settings">Settings</TabsTrigger>
                 </TabsList>
               </div>
 
-              <TabsContent value="editor" className="mt-0">
+              <TabsContent value="editor">
                 <EditorCard value={htmlCode} onChange={setHtmlCode} />
               </TabsContent>
 
-              <TabsContent value="templates" className="mt-0">
+              <TabsContent value="templates">
                 <Card>
-                  <CardContent className="grid gap-3 grid-cols-1 md:grid-cols-2 p-4">
+                  <CardContent className="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 p-4">
                     {templates.map(template => (
                       <Button
                         key={template.id}
                         variant="outline"
                         onClick={() => setHtmlCode(template.code)}
-                        className="h-auto py-3 px-4 text-sm"
+                        className="h-auto p-2 sm:p-4 text-sm sm:text-base"
                       >
                         {template.name}
                       </Button>
@@ -206,7 +207,7 @@ export default function Home() {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="settings" className="mt-0">
+              <TabsContent value="settings">
                 <ConfigurationCard
                   config={config}
                   onChange={setConfig}
@@ -217,17 +218,17 @@ export default function Home() {
         </div>
 
         <Card>
-          <CardHeader className="p-4 border-b">
-            <CardTitle className="text-lg">Preview</CardTitle>
+          <CardHeader className="p-3 sm:p-6 border-b">
+            <CardTitle className="text-lg sm:text-xl">Preview</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-4">
-            <div className="overflow-hidden rounded-lg border p-3">
+            <div className="overflow-hidden rounded-lg border p-2 sm:p-4">
               <Preview htmlCode={htmlCode} style={previewStyle()} />
             </div>
-            <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button
                 onClick={handleDownload}
-                className="flex-1 text-sm h-10"
+                className="flex-1 text-sm sm:text-base"
                 disabled={isGenerating}
                 variant="outline"
               >
@@ -236,7 +237,7 @@ export default function Home() {
               <Button
                 onClick={handleCopyToClipboard}
                 variant="outline"
-                className="text-sm h-10"
+                className="text-sm sm:text-base"
               >
                 Copy to Clipboard
               </Button>
