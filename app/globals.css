@@ -25,10 +25,27 @@
     --ring: 224 71% 4%;
     --radius: 0.5rem;
   }
-}
 
-/* Performance optimizations */
-@layer base {
+  /* Modern Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent));
+  }
+
   * {
     border-color: hsl(var(--border));
   }
