@@ -26,7 +26,6 @@
     --radius: 0.5rem;
   }
 
-  /* Modern Scrollbar Styling */
   ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
@@ -99,5 +98,21 @@
     .container {
       max-width: 1280px;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .cm-editor {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .cm-scroller {
+    max-width: 100%;
+  }
+  
+  .cm-content {
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 }

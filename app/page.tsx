@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, memo, useCallback, lazy, Suspense, useMemo, useEffect } from "react";
-import { html } from "@codemirror/lang-html";
-import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import { useState, memo, useCallback, Suspense, useMemo, useEffect } from "react";
+import TextareaCodeEditor from "@uiw/react-textarea-code-editor";
 import debounce from 'lodash.debounce';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,8 +21,6 @@ const defaultConfig: ImageConfig = {
   scale: 3,
   background: 'transparent'
 };
-
-const CodeMirror = lazy(() => import("@uiw/react-codemirror"));
 
 const EditorCard = memo(({ value, onChange }: { value: string; onChange: (value: string) => void }) => {
   const debouncedOnChange = useMemo(
@@ -47,14 +44,18 @@ const EditorCard = memo(({ value, onChange }: { value: string; onChange: (value:
       </CardHeader>
       <CardContent className="p-5">
         <Suspense fallback={<div>Loading editor...</div>}>
-          <CodeMirror
-            value={value}
-            height="350px"
-            theme={vscodeDark}
-            extensions={[html()]}
-            onChange={debouncedOnChange}
-            className="rounded-lg overflow-hidden text-sm"
-          />
+          <div className="editor-wrapper" style={{ position: 'relative' }}>
+            <TextareaCodeEditor
+              value={value}
+              language="html"
+              placeholder="Please enter HTML code."
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => debouncedOnChange(e.target.value)}
+              padding={15}
+              className="rounded-lg"
+              data-color-mode="dark"
+              data-theme="github-dark"
+            />
+          </div>
         </Suspense>
       </CardContent>
     </Card>

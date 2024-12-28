@@ -25,7 +25,7 @@ A web-based tool that converts HTML and CSS code into downloadable images, with 
 - React 19
 - TypeScript
 - TailwindCSS
-- CodeMirror for code editing
+- React Textarea Code Editor for code editing
 - Radix UI components
 - html-to-image for conversion
 
@@ -71,5 +71,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Built with [Next.js](https://nextjs.org/)
 - UI components from [shadcn/ui](https://ui.shadcn.com/)
-- Code editor powered by [CodeMirror](https://codemirror.net/)
+- Code editor powered by [React Textarea Code Editor/](https://uiwjs.github.io/react-textarea-code-editor/)
 - Toast notifications by [Sonner](https://sonner.emilkowal.ski/)
